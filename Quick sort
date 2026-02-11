@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] a = new int[n];
+
+        for (int i = 0; i < n; i++) a[i] = sc.nextInt();
+
+        int pivot = a[n - 1];
+        int i = 0;
+
+        for (int j = 0; j < n - 1; j++) {
+            if (a[j] <= pivot) {
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+                i++;
+            }
+        }
+
+        int t = a[i];
+        a[i] = a[n - 1];
+        a[n - 1] = t;
+
+        Arrays.sort(a, 0, i);
+        Arrays.sort(a, i + 1, n);
+
+        for (int x : a) System.out.print(x + " ");
+    }
+}

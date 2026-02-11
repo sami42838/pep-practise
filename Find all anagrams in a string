@@ -1,0 +1,37 @@
+class Solution {
+public:
+
+    bool checkAnagram(vector<int> &freq)
+    {
+        for(int i = 0; i<26; i++)
+        {
+            if(freq[i] != 0) return false;
+        }
+        return true;
+    }
+    vector<int> findAnagrams(string s, string p) {
+        int len = p.size(),n = s.size();
+        int i = 0;
+        
+        vector<int> result;
+        vector<int> freq(26,0);
+
+        for(int a = 0; a<len;a++)
+        {
+            freq[p[a] - 'a']--;
+        }
+
+        for(int j =0; j<n; j++)
+        {
+            freq[s[j] - 'a']++;
+
+            while(j-i+1 > len)
+            {
+                freq[s[i] - 'a']--;
+                i++;
+            }
+            if(checkAnagram(freq)) result.push_back(i);
+        }
+        return result;
+    }
+};

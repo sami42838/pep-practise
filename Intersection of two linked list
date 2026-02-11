@@ -1,0 +1,42 @@
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // Step 1: find lengths of both
+        int lenA = getLength(headA);
+        int lenB = getLength(headB);
+
+        ListNode a = headA;
+        ListNode b = headB;
+
+        // Step 2: in this we will move the longer pointer..jitna bda hoga utne se aage bdhaenge
+        if (lenA > lenB) {
+            int diff = lenA - lenB;
+            while (diff-- > 0) {
+                a = a.next;
+            }
+        } else {
+            int diff = lenB - lenA;
+            while (diff-- > 0) {
+                b = b.next;
+            }
+        }
+
+      // Step 3: move both pointers together sath mei
+        while (a != b) {
+            a = a.next;
+            b = b.next;
+        }
+
+        // either intersection node or null
+        return a;
+    }
+
+    // helper function to find length of the list
+    private int getLength(ListNode head) {
+        int len = 0;
+        while (head != null) {
+            len++;
+            head = head.next;
+        }
+        return len;
+    }
+}
